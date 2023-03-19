@@ -19,8 +19,10 @@ class Calculadora():
         v= 0
         self.checkvar1=IntVar()
         self.checkvar2=IntVar()
+        self.checkvar3=IntVar()
         self.checkvar1.set(0)
         self.checkvar2.set(0)
+        self.checkvar3.set(0)
         
         if self.checkvar1.get()==1:
             self.checkvar2.set(0)
@@ -34,6 +36,7 @@ class Calculadora():
         self.hexa = Checkbutton(self.janela, text="hexadecimal", bg="gray", padx=20, variable=self.checkvar2)
         self.result = Label(self.janela, text="o resultado é", bg="gray")
         self.botao = Button(self.janela, text = 'CALCULAR', bg="black", fg="white", width=20 ,height=5, command=self.calcular )
+        self.sair = Button(self.janela, text="SAIR ", bg="red", fg="white", width=20, height=5, command=self.quit)
         
         # todos os enpacotamento
         self.texto.pack(side="top")
@@ -69,9 +72,22 @@ class Calculadora():
             self.fhex = self.hexa.replace("0x","")
             self.result.config(text=self.fhex, fg="blue") 
             
-        elif self.checkvar1.get()==0:
+        if self.checkvar3.get()==1:
+            print("octal acionado")
+            self.decimal = int(self.entrada.get())
+            self.decimal = int((self.decimal))
+            self.octal = oct(self.decimal)
+            self.foctal = self.octal.replace("0o","")
+            self.result.config(text=self.foctal, fg="blue") 
+            
+            
+        if self.checkvar1.get()==0 and self.checkvar2.get()==0 and self.checkvar3.get()==0:
             self.result.config(text="marque alguma opçao", fg="red")
             print("binario desmarcado")
+            
+    def quit(self):
+        self.janela.destroy()
+        
         
 
 
